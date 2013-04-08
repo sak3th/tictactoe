@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/roundedfragment">
+
+    <TextView
+        android:id="@+id/textViewWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+		android:layout_marginTop="20dp"
+		android:textColor="@color/text"
+        android:text="@string/welcome"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="29sp"
+        android:textStyle="bold" />
+	
+	<View
+	    android:layout_width="wrap_content"
+        android:layout_height="30dp" />
+    
+    <TextView
+        android:id="@+id/textViewSignInMsg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in_msg"
+        android:textColor="@color/text"
+        android:textSize="23sp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center"/>
+
+    <View
+	    android:layout_width="wrap_content"
+        android:layout_height="30dp" />
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/buttonSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dip"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/skip"
+            android:textColor="@color/text"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/buttonSignin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dip"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/signin"
+            android:textColor="@color/text"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+	</LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:indeterminateBehavior="cycle"
+        android:visibility="gone" />
+    
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="20dp" />
+
+</LinearLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/roundedfragment"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="5dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/select_account"
+        android:textColor="@color/text"
+        android:textSize="29sp"
+        android:textStyle="bold">
+    </TextView>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dp" />
+
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="5dp" />
+
+    <ListView
+        android:id="@+id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="false"
+        android:listSelector="@android:color/white" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="15dp" />
+    
+    <TextView android:id="@id/android:empty"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:text="No data"/>
+
+</LinearLayout>
