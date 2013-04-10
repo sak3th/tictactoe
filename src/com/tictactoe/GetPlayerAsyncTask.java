@@ -57,8 +57,6 @@ public class GetPlayerAsyncTask extends AsyncTask<String, Integer, HttpResponse>
             
             Type type = new TypeToken<Response<Player>>() {}.getType();
             Response<Player> resp = new Gson().fromJson(sb.toString(), type);
-            
-            //Response resp = new Gson().fromJson(sb.toString(), Response.class);
             playerInfoListener.onPlayerInfoAcquired((Player)resp.obj);                
         } catch (IllegalStateException e) {
             e.printStackTrace();
