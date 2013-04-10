@@ -1,24 +1,54 @@
 package com.tictactoe.model;
 
 public class Player {
-	public String email;
-	public String userId;
-	public String name;
-	public String nickName;
-	public int age;
-	
-	Player(String email, String userId, String name, String nickName, int age) {
-		this.email = email;
-		this.name = name;
-		this.nickName = nickName;
-		this.age = age;
-	}
-	
-	public Player(String email, String userId) {
-		this(email, userId, null, null, 0);
-	}
 
-	public String getEmail() {
-		return email;
-	}
+    String email;
+    String userId;
+    String gcmRegId;
+    String nickName;
+    String name;
+    int age;
+
+    public Player(String email, String userId,String regId, String nickName, String name, int age) {
+        this.email = email;
+        this.userId = userId;
+        this.gcmRegId = regId;
+        this.nickName = nickName;
+        this.name = name;
+        this.age = age;
+    }
+
+    public Player(String email, String userId) {
+        this(email, userId, null, null, null, 0);
+    }
+
+    public Player(Player p) {
+        this.email = p.email;
+        this.userId = p.userId;
+        this.nickName = p.nickName;
+        this.name = p.name;
+        this.age = p.age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+    
+    public void setGcmRegId(String regId) {
+        gcmRegId = regId;
+    }
+    
+    public String getGcmRegId() {
+        return gcmRegId;
+    }
+
+    public void setInfo(String nickName, String name, int age) {
+        this.nickName = nickName;
+        this.name = name;
+        this.age = age;
+    }
 }
