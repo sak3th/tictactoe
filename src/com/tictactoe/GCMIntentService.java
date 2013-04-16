@@ -5,26 +5,27 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;
 
 public class GCMIntentService extends GCMBaseIntentService {
-    
+
     private static final String TAG = "GCMIntentService";
-    
+
     GCMRegistrationListener gcmListener;
 
     public GCMIntentService() {
         super(TicTacToeGlobals.SENDER_ID);
     }
-    
+
     @Override
     public void onCreate() {
         super.onCreate();
     }
-    
+
     public static void register(Context context) {
         GCMRegistrar.checkDevice(context); // checks if device supports GCM
         GCMRegistrar.checkManifest(context); // verifies application manifest meets all requirements
@@ -33,10 +34,10 @@ public class GCMIntentService extends GCMBaseIntentService {
             // TODO what if device does not have reliable data service
             GCMRegistrar.register(context, TicTacToeGlobals.SENDER_ID);
         } else {
-          Log.v(TAG, "Already registered");
+            Log.v(TAG, "Already registered");
         }
     }
-    
+
     public static void unregister(Context mContext) {
         GCMRegistrar.unregister(mContext);
     }
@@ -44,7 +45,10 @@ public class GCMIntentService extends GCMBaseIntentService {
     @Override
     protected void onRegistered(Context context, String registrationId) {
         Log.i(TAG, "Device registered: regId = " + registrationId);
-        ServerUtilities.register(context, registrationId);
+        Storage.storeSharedPref(context, Storage.GCM_REG_ID, registrationId);
+        if(ServerUtilities.register(context, registrationId)) {
+            TicTacToeGlobals.getInstance().getGcmMessageReceiver().send(0, new Bundle());
+        }
     }
 
     @Override
@@ -101,7 +105,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(0, notification);
     }
-    
+
     public interface GCMRegistrationListener {
         public void onGCMRegistered(String regId);
         public void onGCMUnregistered(String regId);

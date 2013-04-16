@@ -15,11 +15,6 @@
  */
 package com.tictactoe;
 
-import com.google.android.gcm.GCMRegistrar;
-
-import android.content.Context;
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -30,6 +25,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+
+import android.content.Context;
+import android.util.Log;
+
+import com.google.android.gcm.GCMRegistrar;
 
 /**
  * Helper class used to communicate with the demo server.

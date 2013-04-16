@@ -1,0 +1,11 @@
+Prototype 1
+1. Sign in with Google account
+2. Sync all data with Google account
+3. Data to sync
+	a. User information - name, nickname, email
+	b. Active games and completed(undeleted) games
+4. Ability to invite friends
+	a. Share a URL where users can download apk
+	b. Game should be up and alive
+5. Should be able to handle data wipe in the application
+6. 

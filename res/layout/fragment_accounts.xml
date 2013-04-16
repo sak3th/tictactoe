@@ -1,49 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@drawable/roundedfragment"
     android:orientation="vertical" >
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="5dp" />
-
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/select_account"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:text="@string/choose_account"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/text"
         android:textSize="29sp"
-        android:textStyle="bold">
+        android:textStyle="bold" >
     </TextView>
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="2dp" />
+        android:layout_height="5dp" />
 
+<!--     <View
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/roundedbutton" />
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="5dp" />
+        android:layout_height="20dp" /> -->
 
     <ListView
         android:id="@+id/android:list"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
         android:drawSelectorOnTop="false"
-        android:listSelector="@android:color/white" />
+        android:listSelector="@android:color/white"
+        android:divider="@android:color/transparent" />
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="15dp" />
-    
-    <TextView android:id="@id/android:empty"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:text="No data"/>
+
+    <TextView
+        android:id="@id/android:empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No data" />
 
 </LinearLayout>

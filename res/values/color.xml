@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="white">#FFFFFF</color>
     <color name="background">#FFFFFF</color>
-    <color name="backgroundfgmt">#EEEEEE</color>
-    <color name="background_offwhite">#E7E4D3</color>    
+    <color name="backgroundfgmt">#FFFFFF</color>
+    <color name="background_offwhite">#E1e1e1</color>    
     <color name="text">#565656</color>
     <color name="button">#936A4A</color>
     <color name="button_gray">#989898</color>

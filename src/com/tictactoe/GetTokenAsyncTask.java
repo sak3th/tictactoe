@@ -124,5 +124,12 @@ public class GetTokenAsyncTask extends AsyncTask<Account, Void, AccountManagerFu
         public void onTokenAcquired(Boolean result);
         public void onUserInputRequired(Intent intent);
     }
+    
+    // TODO build all queries this way
+//    UrlBuilder builder = new UrlBuilder("https://graph.facebook.com/oauth/access_token")
+//    .addParameter("client_id", application.getKey())
+//    .addParameter("client_secret", application.getSecret())
+//    .addParameter("redirect_uri", callbackURL)
+//    .addParameter("code", code);
 
 }

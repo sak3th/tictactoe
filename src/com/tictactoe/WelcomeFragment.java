@@ -7,16 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class WelcomeFragment extends Fragment {
 
     private TextView mLoginAllow;
     private TextView mLoginSkip;
-    private LinearLayout mButtons;
-    private ProgressBar mSpinner;
 
     private LoginListener mLoginListener;
 
@@ -44,8 +40,6 @@ public class WelcomeFragment extends Fragment {
         mLoginAllow.setOnClickListener(mOnClickListener);
         mLoginSkip  = (TextView) view.findViewById(R.id.buttonSkip);
         mLoginSkip.setOnClickListener(mOnClickListener);
-        mButtons = (LinearLayout) view.findViewById(R.id.buttons);
-        mSpinner = (ProgressBar) view.findViewById(R.id.spinner);
     }
 
     private void onLoginAllowed() {
