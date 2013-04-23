@@ -8,6 +8,12 @@
     <string name="signin">Allow</string>
     <string name="skip">Skip</string>
     <string name="choose_account">Choose Account</string>
+    <string name="back">Back</string>
+    <string name="submit">Submit</string>
+    <string name="waiting_for_turn">Waiting for turn</string>
+    <string name="your_turn">Your turn</string>
+    <string name="game_won">Game won</string>
+    <string name="game_lost">Game lost</string>
     
     
     <string name="sign_in_msg">TicTacToe uses your Google account to connect and play with friends</string>

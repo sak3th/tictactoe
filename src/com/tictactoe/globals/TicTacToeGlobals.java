@@ -1,4 +1,4 @@
-package com.tictactoe;
+package com.tictactoe.globals;
 
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -10,7 +10,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
-import com.tictactoe.GcmMessageReceiver.Receiver;
+import com.tictactoe.gcm.GcmMessageReceiver;
+import com.tictactoe.gcm.GcmMessageReceiver.Receiver;
+import com.tictactoe.model.Game;
 import com.tictactoe.model.Player;
 
 public class TicTacToeGlobals extends ContextWrapper {
@@ -40,6 +42,8 @@ public class TicTacToeGlobals extends ContextWrapper {
     private Player mPlayer;
     private Account mAccount;
     
+    private Game[] mGames;
+    
     private GcmMessageReceiver mGcmMessageReceiver;
 
     private DefaultHttpClient mHttpClient;
@@ -57,7 +61,7 @@ public class TicTacToeGlobals extends ContextWrapper {
         mHttpClient.getParams().setBooleanParameter(ClientPNames.HANDLE_REDIRECTS, false);
     }
 
-    static TicTacToeGlobals getInstance() {
+    public static TicTacToeGlobals getInstance() {
         if (sMe == null) {
             throw new IllegalStateException("No TicTacToeGlobals here!");
         }
@@ -86,6 +90,14 @@ public class TicTacToeGlobals extends ContextWrapper {
 
     public void setAccount(Account account) {
         mAccount = account;
+    }
+    
+    public Game[] getGames() {
+        return mGames;
+    }
+
+    public void setGames(Game[] games) {
+        mGames = games;
     }
 
     public DefaultHttpClient getHttpCient() {

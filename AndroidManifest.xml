@@ -26,7 +26,7 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <application
-        android:name="TicTacToeApp"
+        android:name="com.tictactoe.globals.TicTacToeApp"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
@@ -34,17 +34,22 @@
         android:persistent="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.tictactoe.HomeActivity"
-            android:label="@string/app_name" >
+            android:name="com.tictactoe.PreHomeActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.tictactoe.GameActivity">
-        </activity>
+        <activity android:name="com.tictactoe.HomeActivity" />
+        <activity android:name="com.tictactoe.GameActivity" />
+        <activity android:name="com.tictactoe.GameKeeperActivity" />
+       
+        <activity android:name="com.tictactoe.ProgressSpinnerActivity"
+            android:theme="@android:style/Theme.Dialog" />
+
 
         <receiver
             android:name="com.google.android.gcm.GCMBroadcastReceiver"
@@ -57,7 +62,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".GCMIntentService" />
+        <service android:name="com.tictactoe.gcm.GCMIntentService" />
     </application>
 
 </manifest>

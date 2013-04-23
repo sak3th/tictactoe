@@ -9,3 +9,16 @@ Prototype 1
 	b. Game should be up and alive
 5. Should be able to handle data wipe in the application
 6. 
+
+
+
+
+
+
+
+
+
+Design Considerations
+1. AsyncTask or Service  - Service is the winner
+2. What should be done when Activity requests data from the server and is destroyed soon after?
+3.  

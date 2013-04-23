@@ -1,4 +1,4 @@
-package com.tictactoe;
+package com.tictactoe.appengine;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +16,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tictactoe.globals.TicTacToeGlobals;
 import com.tictactoe.model.Player;
 import com.tictactoe.model.Response;
 

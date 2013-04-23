@@ -1,4 +1,4 @@
-package com.tictactoe;
+package com.tictactoe.globals;
 
 import android.app.Application;
 

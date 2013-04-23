@@ -3,7 +3,6 @@ package com.tictactoe;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -15,16 +14,21 @@ import android.widget.ProgressBar;
 import com.google.android.gcm.GCMRegistrar;
 import com.google.gson.Gson;
 import com.tictactoe.AccountsFragment.AccountsListener;
-import com.tictactoe.GameKeeperFragment.GameListener;
-import com.tictactoe.GcmMessageReceiver.Receiver;
-import com.tictactoe.GetPlayerAsyncTask.PlayerInfoListener;
-import com.tictactoe.GetTokenAsyncTask.GetTokenListener;
 import com.tictactoe.WelcomeFragment.LoginListener;
+import com.tictactoe.appengine.GetPlayerAsyncTask;
+import com.tictactoe.appengine.GetPlayerAsyncTask.PlayerInfoListener;
+import com.tictactoe.appengine.GetTokenAsyncTask;
+import com.tictactoe.appengine.GetTokenAsyncTask.GetTokenListener;
+import com.tictactoe.gcm.GCMIntentService;
+import com.tictactoe.gcm.GcmMessageReceiver;
+import com.tictactoe.gcm.GcmMessageReceiver.Receiver;
+import com.tictactoe.globals.Storage;
+import com.tictactoe.globals.TicTacToeGlobals;
 import com.tictactoe.model.Player;
 
 public class HomeActivity extends Activity 
-implements LoginListener, GetTokenListener, AccountsListener, 
-PlayerInfoListener, GameListener, Receiver {
+		implements LoginListener, GetTokenListener, AccountsListener, 
+					PlayerInfoListener, Receiver {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
@@ -38,39 +42,38 @@ PlayerInfoListener, GameListener, Receiver {
     private ProgressBar mProgressBar;
     private WelcomeFragment mWelcomeFragment;
     private AccountsFragment mAccountsFragment;
-    private GameKeeperFragment mGameFragment;
 
     private GcmMessageReceiver mGcmMsgReceiver; 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        if(findViewById(R.id.home_fragment_container) != null) {
-            if(savedInstanceState != null) {
-                return;
-            }			
-        }
+    	super.onCreate(savedInstanceState);
 
-        mWelcomeFragment = new WelcomeFragment();
-        mAccountsFragment = new AccountsFragment();
-        mGameFragment = new GameKeeperFragment();
+    	setContentView(R.layout.activity_home);
+    	mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+    	if(findViewById(R.id.home_fragment_container) != null) {
+    		if(savedInstanceState != null) {
+    			return;
+    		}			
+    	}
 
-        TicTacToeGlobals.getInstance().setGcmMessageReceiver(this);
+    	mWelcomeFragment = new WelcomeFragment();
+    	mAccountsFragment = new AccountsFragment();
 
-        if(Storage.getSharedPref(getApplicationContext(), Storage.GCM_REG_ID) == null) {
-            Log.d(TAG, "showing welcome fragment");
-            showWelcomeFragment();
-        } else {
-            if(GCMRegistrar.isRegisteredOnServer(getApplicationContext())) {
-                Log.d(TAG, "already registered on server");
-                // TODO what if the account that the user registers with is not available anymore
-                showGameFragment();
-            } else {
-                Log.d(TAG, "not registered on server");
-            }
-        }
+    	TicTacToeGlobals.getInstance().setGcmMessageReceiver(this);
+
+    	if(Storage.get(getApplicationContext(), Storage.GCM_REG_ID) == null) {
+    		Log.d(TAG, "showing welcome fragment");
+    		showWelcomeFragment();
+    	} else {
+    		if(GCMRegistrar.isRegisteredOnServer(getApplicationContext())) {
+    			Log.d(TAG, "already registered on server");
+    			// TODO what if the account that the user registers with is not available anymore
+    			showGameActivity();
+    		} else {
+    			Log.d(TAG, "not registered on server");
+    		}
+    	}
     }
 
     @Override
@@ -125,6 +128,7 @@ PlayerInfoListener, GameListener, Receiver {
 
     @Override
     public void onAccountSelected(Account account) {
+        Storage.set(getApplicationContext(), Storage.REG_EMAIL, account.name);
         TicTacToeGlobals.getInstance().setAccount(account);
         getFragmentManager().beginTransaction().remove(mAccountsFragment).commit();
         mProgressBar.setVisibility(View.VISIBLE);
@@ -139,24 +143,18 @@ PlayerInfoListener, GameListener, Receiver {
     }
 
     @Override
-    public void onGameClicked() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         mProgressBar.setVisibility(View.INVISIBLE);
         switch (resultCode) {
         case TicTacToeGlobals.GCM_REGISTERED_ON_SERVER:
-            showGameFragment();
+            showGameActivity();
             break;
         case TicTacToeGlobals.GCM_NOT_REGISTERED_ON_SERVER:
             // TODO allow only AI games
-            showGameFragment();
+            showGameActivity();
         case TicTacToeGlobals.GCM_REGISTRATION_FAILED:
             // TODO allow only AI games
-            showGameFragment();
+            showGameActivity();
             break;
         default:
             break;
@@ -184,11 +182,7 @@ PlayerInfoListener, GameListener, Receiver {
         transaction.commit();
     }
 
-    private void showGameFragment() {
-        Bundle args = new Bundle();
-        mGameFragment.setArguments(args);
-
-        // pop all fragments
+    private void showGameActivity() {
         FragmentManager fm = getFragmentManager();
         for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {    
             fm.popBackStack();
@@ -196,10 +190,9 @@ PlayerInfoListener, GameListener, Receiver {
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         // TODO add animations using transaction.setCustomAnimations() api
-
-        // Replace whatever is in the fragment_container view with this fragment,
-        transaction.replace(R.id.home_fragment_container, mGameFragment, FRAGMENT_GAME_TAG);
         transaction.commit();
+        finish();
+        startActivity(new Intent(getApplicationContext(), GameKeeperActivity.class));
     }
 
     //    private Fragment getActiveFragment() {

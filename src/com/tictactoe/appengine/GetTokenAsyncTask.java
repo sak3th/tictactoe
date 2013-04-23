@@ -1,4 +1,4 @@
-package com.tictactoe;
+package com.tictactoe.appengine;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,6 +23,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.tictactoe.globals.TicTacToeGlobals;
 
 public class GetTokenAsyncTask extends AsyncTask<Account, Void, AccountManagerFuture<Bundle>> {
     

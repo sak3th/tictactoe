@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tictactoe;
+package com.tictactoe.appengine;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -30,6 +30,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gcm.GCMRegistrar;
+import com.tictactoe.globals.TicTacToeGlobals;
 
 /**
  * Helper class used to communicate with the demo server.
@@ -45,7 +46,7 @@ public final class ServerUtilities {
      *
      * @return whether the registration succeeded or not.
      */
-    static boolean register(final Context context, final String regId) {
+    public static boolean register(final Context context, final String regId) {
         Log.i(TicTacToeGlobals.TAG, "registering device (regId = " + regId + ")");
         String serverUrl = TicTacToeGlobals.APPENGINE_URI + "/gcm/register";
         Map<String, String> params = new HashMap<String, String>();
@@ -89,7 +90,7 @@ public final class ServerUtilities {
     /**
      * Unregister this account/device pair within the server.
      */
-    static void unregister(final Context context, final String regId) {
+    public static void unregister(final Context context, final String regId) {
         Log.i(TicTacToeGlobals.TAG, "unregistering device (regId = " + regId + ")");
         String serverUrl = TicTacToeGlobals.APPENGINE_URI + "/gcm/unregister";
         Map<String, String> params = new HashMap<String, String>();

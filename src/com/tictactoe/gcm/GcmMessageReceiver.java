@@ -1,9 +1,11 @@
-package com.tictactoe;
+package com.tictactoe.gcm;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.util.Log;
+
+import com.tictactoe.globals.TicTacToeGlobals;
 
 public class GcmMessageReceiver extends ResultReceiver {
     

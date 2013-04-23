@@ -1,34 +1,59 @@
 package com.tictactoe.model;
 
 public class Game {
-    
+
     public enum Turn {
         X, O
     }
-    
-    public enum GameState {
-        WHISTLE, MOVE1, MOVE2, MOVE3, MOVE4, MOVE5, MOVE6, MOVE7, MOVE8, MOVE9, BELL
+
+    public enum Move {
+        NOT_PLAYED, CROSS_PLAYED, CROSS_PLAY, NOUGHT_PLAYED, NOUGHT_PLAY
     }
-    
+
+    public enum GameState {
+        STARTED,  ENDED
+    }
+
+    public String gameId;
+
     public String xEmail;
     public String oEmail;
-    
-    public String xGcmId;
-    public String oGcmId;
-    
+
     public Turn turn;
+    public Move[] moves;
     public GameState gameState;
 
-    public Game(String xEmail, String oEmail, String xGcmId, String oGcmId, Turn turn) {
+    public Game(String xEmail, String oEmail, Turn turn) {
         this.xEmail = xEmail;
         this.oEmail = oEmail;
-        this.xGcmId = xGcmId;
-        this.oGcmId = oGcmId;
         this.turn = turn;
+
+        moves = new Move[9];
+        for(int i=0; i<9; i++) {
+            moves[i] = Move.NOT_PLAYED;
+        }
     }
-    
-    
-    
-    
+
+    public void play(int position) {
+        if(moves[position] == Move.CROSS_PLAY || moves[position] == Move.NOUGHT_PLAY) {
+            moves[position] = Move.NOT_PLAYED;
+        } else if(moves[position] == Move.NOT_PLAYED){
+            Move currentMove = ((turn == Turn.X)? Move.CROSS_PLAY: Move.NOUGHT_PLAY);
+            for(int i=0; i<9; i++) {
+                if(moves[i] == currentMove) {
+                    moves[i] = Move.NOT_PLAYED;
+                    break;
+                }
+            }
+            moves[position] = currentMove;
+        }
+    }
+
+    public boolean isMyTurn(String email) {
+        if(turn == Turn.X)
+            return email.equalsIgnoreCase(xEmail);
+        else
+            return email.equalsIgnoreCase(oEmail);
+    }
 
 }

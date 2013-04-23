@@ -1,4 +1,4 @@
-package com.tictactoe;
+package com.tictactoe.gcm;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -10,6 +10,11 @@ import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
 import com.google.android.gcm.GCMRegistrar;
+import com.tictactoe.HomeActivity;
+import com.tictactoe.R;
+import com.tictactoe.appengine.ServerUtilities;
+import com.tictactoe.globals.Storage;
+import com.tictactoe.globals.TicTacToeGlobals;
 
 public class GCMIntentService extends GCMBaseIntentService {
 
@@ -45,7 +50,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     @Override
     protected void onRegistered(Context context, String registrationId) {
         Log.i(TAG, "Device registered: regId = " + registrationId);
-        Storage.storeSharedPref(context, Storage.GCM_REG_ID, registrationId);
+        Storage.set(context, Storage.GCM_REG_ID, registrationId);
         if(ServerUtilities.register(context, registrationId)) {
             TicTacToeGlobals.getInstance().getGcmMessageReceiver().send(0, new Bundle());
         }
